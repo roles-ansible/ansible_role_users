@@ -1,0 +1,12 @@
+---
+# all admins on this host
+admins: [] 
+
+# all users who should be available on this host
+accounts: []
+
+# copy bashrc to all users
+home_sweet_home: false
+
+# should we check the role version to prevent stupid users with outdated roles?
+submodules_versioncheck: true
