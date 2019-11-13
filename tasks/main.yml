@@ -32,7 +32,7 @@
     name: '{{ item.key | string }}'
     shell: '{{ default_shell }}'
     groups: '{{ item.key | string }}'
-    password: "{{ item.value | string }}"
+    password: "{{ item.value.0 | string }}"
     append: no
   with_dict: '{{ accounts_with_password }}'
   changed_when: false
