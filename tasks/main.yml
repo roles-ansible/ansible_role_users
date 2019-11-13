@@ -19,7 +19,7 @@
   become: yes
   user:
     name: '{{ item }}'
-    shell: '/bin/bash'
+    shell: '{{ default_shell }}'
     groups: '{{ item }}'
     append: no
   with_items: '{{ accounts }}'
@@ -34,7 +34,18 @@
     group: '{{ item }}'
     mode: 'u=rw,g=r,o='
   with_items: '{{ accounts }}'
-  when: home_sweet_home|bool
+  when: home_sweet_home | bool
+
+- name: Copy .vimrc for local users
+  become: yes
+  copy:
+    src: 'files/home_environment/vimrc'
+    dest: '/home/{{ item }}/.vimrc'
+    owner: '{{ item }}'
+    group: '{{ item }}'
+    mode: 'u=rw,g=r,o='
+  with_items: '{{ accounts }}'
+  when: home_sweet_home | bool
 
 - name: Add ansible user
   become: yes

@@ -8,5 +8,8 @@ accounts: []
 # copy bashrc to all users
 home_sweet_home: false
 
+# default shell
+default_shell: '/bin/bash'
+
 # should we check the role version to prevent stupid users with outdated roles?
 submodules_versioncheck: true
