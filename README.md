@@ -26,6 +26,15 @@ If the user does not exist it is hard to add a ssh key for him!
 * ``accounts`` (default ``[]``):<br/>
   A list of usernames that will be created on this host, if they don't exisit
 
+* ``default shell`` (default ``/bin/bash``)
+
+
+* ``manage_user_passwords`` (default ``false``)
+  manage user passwords?
+
+* ``accounts_with_password`` (default ``[]``)
+  all users and password hashes
+
 For aditional variables please have a look into ``defaults/main.yml``!
 
 
@@ -42,9 +51,19 @@ admins:
 
 Alice, Bob and Eve want to be users on this host:
 ```
+# without password
 accounts:
   - alice
   - bob
   - eve
+
+# with password
+accounts_with_password:
+  alice:
+    - "$6$foo$LtJkKZx0ndF4kM0ImEtCaQhbMYWD.mlqatgAIzuDufGI0IGxe0wpSV7oXqwnLmO4MA.4A5JCnPhOqUyT3OfVV1"
+  bob:
+    - "$6$bar$fsDFaQrp1MI9yhNnoKlXJFfXSLpz/dpqWaA2NP/71WJUzfqQxPVvFY6Px7VlDppW/NB6Cbz6BjF2b9bD.riFX1"
+  eve:
+    - "$6$baz$7xpdAhdFpIM304YYQ88nz33xmJXnh5qxtlWoGSkc55a.R4DCRp62l.qhiYKbtjRzEjb5qnGoM9vthcHagPkyS/"
 ```
 

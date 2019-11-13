@@ -24,6 +24,19 @@
     append: no
   with_items: '{{ accounts }}'
   changed_when: false
+  when: not manage_user_passwords | bool
+
+- name: Add local users
+  become: yes
+  user:
+    name: '{{ item.key | string }}'
+    shell: '{{ default_shell }}'
+    groups: '{{ item.key | string }}'
+    password: "{{ item.value | string }}"
+    append: no
+  with_dict: '{{ accounts_with_password }}'
+  changed_when: false
+  when: manage_user_passwords | bool
 
 - name: Copy .bashrc for local users
   become: yes
@@ -84,7 +97,7 @@
     mode: 'u=r,g=r,o='
     validate: /usr/sbin/visudo -cf %s
 
-- name: adding existing user '{{ item }}' to group admins
+- name: "adding existing user '{{ item }}' to group admins"
   become: yes
   user:
     name: '{{ item }}'

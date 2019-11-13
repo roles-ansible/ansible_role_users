@@ -11,5 +11,13 @@ home_sweet_home: false
 # default shell
 default_shell: '/bin/bash'
 
+# set password to users
+manage_user_passwords: false
+
+# define user passwords
+accounts_with_password: []
+#  user:
+#    - "$passwordhash"
+
 # should we check the role version to prevent stupid users with outdated roles?
 submodules_versioncheck: true
