@@ -63,6 +63,7 @@
     owner: ansible
     group: admins
     mode: 'u=rwx,g=,o='
+  changed_when: false
 
 - name: Create /etc/sudoers.d directory
   become: yes
