@@ -66,4 +66,8 @@ accounts_with_password:
   eve:
     - "$6$baz$7xpdAhdFpIM304YYQ88nz33xmJXnh5qxtlWoGSkc55a.R4DCRp62l.qhiYKbtjRzEjb5qnGoM9vthcHagPkyS/"
 ```
-
+### Protipp:
+Use this to generate a password hash. *(Obviously you have to replace``MyPassword`` with your password!)*
+```
+python3 -c 'import crypt; print(crypt.crypt("MyPassword"))'
+```
