@@ -1,0 +1,22 @@
+---
+galaxy_info:
+  role_name: users
+  author: do1jlr
+  description: Manage your SSH Server - and deploy a good sshd configuration
+  license: "MIT"
+  min_ansible_version: 2.8
+  github_branch: main
+  platforms:
+    - name: Archlinux
+      versions: all
+    - name: Debian
+      versions: all
+    - name: Ubuntu
+      versions: all
+    - name: Fedora
+      versions: all
+  galaxy_tags:
+    - ssh
+    - sshd
+    - authorisation
+dependencies: []

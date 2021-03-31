@@ -1,4 +1,4 @@
- role ssh_authorized_keys
+ ansible_role_users
 ==============================
 Ansible Rolle to manage and deploy ssh keys of admin and non-admin users
 
