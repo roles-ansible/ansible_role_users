@@ -1,6 +1,6 @@
 ---
 # all admins on this host
-admins: [] 
+admins: []
 
 # all users who should be available on this host
 accounts: []

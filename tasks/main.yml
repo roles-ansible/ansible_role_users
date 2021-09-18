@@ -1,45 +1,46 @@
 ---
-- include_tasks: versioncheck.yml
+- name: run optional versionscheck
+  ansible.builtin.include_tasks: versioncheck.yml
   when: submodules_versioncheck|bool
 
 - name: Add admin group
-  become: yes
+  become: true
   group:
     name: 'admins'
     state: present
 
 - name: Add individual group
-  become: yes
+  become: true
   group:
     name: '{{ item }}'
     state: present
   with_items: '{{ accounts }}'
 
 - name: Add local users
-  become: yes
+  become: true
   user:
     name: '{{ item }}'
     shell: '{{ default_shell }}'
     groups: '{{ item }}'
-    append: no
+    append: false
   with_items: '{{ accounts }}'
   changed_when: false
   when: not manage_user_passwords | bool
 
 - name: Add local users
-  become: yes
+  become: true
   user:
     name: '{{ item.key | string }}'
     shell: '{{ default_shell }}'
     groups: '{{ item.key | string }}'
     password: "{{ item.value.0 | string }}"
-    append: no
+    append: false
   with_dict: '{{ accounts_with_password }}'
   changed_when: false
   when: manage_user_passwords | bool
 
 - name: Copy .bashrc for local users
-  become: yes
+  become: true
   copy:
     src: 'files/home_environment/bashrc'
     dest: '/home/{{ item }}/.bashrc'
@@ -50,7 +51,7 @@
   when: home_sweet_home | bool
 
 - name: Copy .vimrc for local users
-  become: yes
+  become: true
   copy:
     src: 'files/home_environment/vimrc'
     dest: '/home/{{ item }}/.vimrc'
@@ -61,15 +62,15 @@
   when: home_sweet_home | bool
 
 - name: Add ansible user
-  become: yes
+  become: true
   user:
     name: 'ansible'
     shell: '/bin/bash'
     groups: 'admins'
-    append: yes
+    append: true
 
 - name: Create .ssh directory for user ansible
-  become: yes
+  become: true
   file:
     path: '/home/ansible/.ssh'
     state: directory
@@ -79,7 +80,7 @@
   changed_when: false
 
 - name: Create /etc/sudoers.d directory
-  become: yes
+  become: true
   file:
     path: '/etc/sudoers.d'
     state: directory
@@ -88,7 +89,7 @@
     mode: 'u=rwx,g=x,o=x'
 
 - name: Copy sudoers file
-  become: yes
+  become: true
   copy:
     src: 'files/home_environment/sudoers'
     dest: '/etc/sudoers.d/ansible'
@@ -98,10 +99,10 @@
     validate: /usr/sbin/visudo -cf %s
 
 - name: "adding existing user '{{ item }}' to group admins"
-  become: yes
+  become: true
   user:
     name: '{{ item }}'
     groups: admins
-    append: yes
+    append: true
   with_items: '{{ admins }}'
   changed_when: false
