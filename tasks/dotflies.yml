@@ -1,0 +1,20 @@
+---
+- name: Copy .bashrc for local users
+  become: true
+  ansible.builtin.copy:
+    src: 'files/home_environment/bashrc'
+    dest: '/home/{{ item }}/.bashrc'
+    owner: '{{ item }}'
+    group: '{{ item }}'
+    mode: 'u=rw,g=r,o='
+  with_items: '{{ accounts }}'
+
+- name: Copy .vimrc for local users
+  become: true
+  ansible.builtin.copy:
+    src: 'files/home_environment/vimrc'
+    dest: '/home/{{ item }}/.vimrc'
+    owner: '{{ item }}'
+    group: '{{ item }}'
+    mode: 'u=rw,g=r,o='
+  with_items: '{{ accounts }}'

@@ -1,6 +1,9 @@
-# Superrechte für die Gruppe Admins:
-# 
-# Verwaltet von ansbile
 #
+# ansible managed
+#
+# create sudo power for:
+#   - group: admins
+#   - user: ansible
+#
+ansible ALL=NOPASSWD: ALL
 %admins ALL=NOPASSWD: ALL
- 

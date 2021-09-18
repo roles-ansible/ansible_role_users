@@ -1,0 +1,36 @@
+---
+- name: adding group 'admins'
+  become: true
+  ansible.builtin.group:
+    name: 'admins'
+    state: present
+
+- name: adding a group for each user
+  become: true
+  ansible.builtin.group:
+    name: '{{ item }}'
+    state: present
+  with_items: '{{ accounts }}'
+
+- name: adding each configured user
+  become: true
+  ansible.builtin.user:
+    name: '{{ item }}'
+    shell: '{{ default_shell }}'
+    groups: '{{ item }}'
+    append: false
+  with_items: '{{ accounts }}'
+  changed_when: false
+  when: not manage_user_passwords | bool
+
+- name: adding users with configured password
+  become: true
+  ansible.builtin.user:
+    name: '{{ item.key | string }}'
+    shell: '{{ default_shell }}'
+    groups: '{{ item.key | string }}'
+    password: "{{ item.value.0 | string }}"
+    append: false
+  with_dict: '{{ accounts_with_password }}'
+  changed_when: false
+  when: manage_user_passwords | bool

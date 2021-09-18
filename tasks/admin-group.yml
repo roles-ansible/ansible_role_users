@@ -1,0 +1,9 @@
+---
+- name: add authorized user to admins group
+  become: true
+  ansible.builtin.user:
+    name: '{{ item }}'
+    groups: 'admins'
+    append: true
+  with_items: '{{ admins }}'
+  changed_when: false

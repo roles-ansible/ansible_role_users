@@ -1,0 +1,19 @@
+---
+- name: Create /etc/sudoers.d directory
+  become: true
+  ansible.builtin.file:
+    path: '/etc/sudoers.d'
+    state: directory
+    owner: root
+    group: root
+    mode: 'u=rwx,g=x,o=x'
+
+- name: create sudo permission for group root and user ansible
+  become: true
+  ansible.builtin.copy:
+    src: 'files/home_environment/sudoers'
+    dest: '/etc/sudoers.d/ansible'
+    owner: root
+    group: root
+    mode: 'u=r,g=r,o='
+    validate: /usr/sbin/visudo -cf %s

@@ -19,5 +19,5 @@ accounts_with_password: []
 #  user:
 #    - "$passwordhash"
 
-# should we check the role version to prevent stupid users with outdated roles?
-submodules_versioncheck: true
+# optionally run versionscheck (true is recomended)
+submodules_versioncheck: false
