@@ -2,7 +2,7 @@
 galaxy_info:
   role_name: users
   author: do1jlr
-  description: Ansible Rolle to manage and deploy ssh keys of admin and non-admin users
+  description: Ansible role to create admin and non-admin users on linux hosts
   license: "MIT"
   min_ansible_version: 2.11
   github_branch: main
