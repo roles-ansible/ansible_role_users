@@ -1,7 +1,7 @@
 ---
 - name: adding admin user ansible
   become: true
-  user:
+  ansible.builtin.user:
     name: 'ansible'
     shell: '/bin/bash'
     groups: 'admins'
@@ -9,7 +9,7 @@
 
 - name: Create .ssh directory for user ansible
   become: true
-  file:
+  ansible.builtin.file:
     path: '/home/ansible/.ssh'
     state: directory
     owner: ansible
